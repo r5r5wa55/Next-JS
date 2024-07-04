@@ -26,32 +26,34 @@ export default function User() {
 
     }, [])
 
-    const hanldleDelete=(id)=>{
+    const hanldleDelete = (id) => {
         console.log(id);
-        
-        fetch(`https://www.melivecode.com/api/users/delete`,{
+
+        fetch(`https://www.melivecode.com/api/users/delete`, {
             method: "DELETE",
             headers: {
                 "Content-type": "application/json"
             },
             body: JSON.stringify({
-                id:id
+                id: id
             })
         }).then(res => res.json()).then(result => {
             console.log(result);
         })
     }
     return (
-        <div>
+        <div >
             <Link href='/user/create'>Create</Link>
-            <ul>
+            <ul className='max-w-7xl mx-auto'>
                 {
                     user.map(user => (
-                        <li key={user.id}>
-                            <img src={user.avatar} alt="" height={50} />
+                        <li key={user.id} className='flex  items-center justify-around'>
+                            <img src={user.avatar} alt="" className='h-24' />
                             {user.fname}  {user.lname} {user.username}
-                            <button onClick={()=> hanldleDelete(user.id)}>Delete</button>
-                            <Link href={`user/edit/`+user.id}>Edit</Link>
+                            <div className="flex gap-3">
+                                <button onClick={() => hanldleDelete(user.id)}>Delete</button>
+                                <Link href={`user/edit/` + user.id}>Edit</Link>
+                            </div>
                         </li>
                     ))
                 }
